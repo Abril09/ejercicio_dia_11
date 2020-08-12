@@ -44,6 +44,6 @@ public class MainActivity extends AppCompatActivity {
     @Override
     protected void onDestroy() {
         super.onDestroy();
-        Timber.d("onDestroy);
+        Timber.d("onDestroy");
     }
 }
