@@ -28,4 +28,22 @@ public class MainActivity extends AppCompatActivity {
         });
 
      }
+
+    @Override
+    protected void onStart() {
+        super.onStart();
+        Timber.d("onstart");
+    }
+
+    @Override
+    protected void onStop() {
+        super.onStop();
+        Timber.d("onStop");
+    }
+
+    @Override
+    protected void onDestroy() {
+        super.onDestroy();
+        Timber.d("onDestroy);
+    }
 }
