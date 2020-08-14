@@ -8,26 +8,44 @@ import android.os.Bundle;
 
 import com.crisspian.fragment_guide_01.databinding.ActivityMainBinding;
 
+import java.util.Optional;
+
 import lombok.val;
 
 public class MainActivity extends AppCompatActivity {
     private ActivityMainBinding binding;
+    private First_Fragment fragment;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         binding = ActivityMainBinding.inflate(getLayoutInflater());
         setContentView(binding.getRoot());
+        binding.button.setText("open");
+        fragment = First_Fragment.newInstance("","");
         binding.button.setOnClickListener((x)->{
-            this.showFragment();
+            if (!fragment.isAdded()) {
+                this.showFragment();
+            } else {
+                this.closeFragment();
+            }
         });
     }
 
     private void showFragment(){
-        val fragment = First_Fragment.newInstance("","");
         getSupportFragmentManager().beginTransaction()
                 .add(binding.fragmentContainer.getId(),fragment)
                 .addToBackStack(null)
                 .commit();
+        binding.button.setText("close");
+    }
+
+    private void  closeFragment(){
+        getSupportFragmentManager()
+                .beginTransaction()
+                .remove(this.fragment)
+                .commit();
+        binding.button.setText("open");
     }
 
 }
